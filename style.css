@@ -1,0 +1,86 @@
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#body-wrapper {
+    display: flex;
+    height: 100%;
+}
+
+#input-container {
+    padding: 1rem;
+    width: 40%;
+}
+
+#input>textarea {
+    max-width: 70ch;
+    width: 100%;
+    min-height: 60ch;
+}
+
+#output-container {
+    width: 60%;
+    padding: 1rem;
+}
+
+.control-group {
+    width: 35vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.control-group>* {
+    margin: 0.2rem;
+    margin-bottom: 0rem;
+    margin-right: 0rem;
+}
+
+#output {
+    height: 35vw;
+    width: 35vw;
+    border: 2px solid gray;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.55vw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: white;
+}
+
+#output-lines {
+    max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    line-height: 1.6;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    #body-wrapper {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+
+    #input-container,
+    #output-container {
+        width: 90%;
+    }
+
+    #output {
+        height: 90vw;
+        width: 90vw;
+        font-size: 4vw;
+    }
+
+    .control-group {
+        width: 70vw;
+    }
+}

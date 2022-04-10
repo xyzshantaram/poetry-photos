@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,40 @@
     <title>Document</title>
     <link rel='stylesheet' href='style.css'>
 </head>
+
 <body>
-    <script defer src='main.js'></script>
+    <script type="module" defer src='main.js'></script>
+
+    <div id="body-wrapper">
+        <div id="input-container">
+            <div id="input">
+                <textarea></textarea>
+            </div>
+        </div>
+        <div id="output-container">
+            <div id="output">
+                <div id="output-lines"></div>
+            </div>
+            <div id="output-controls">
+                <div class="control-group">
+                    <label for="output-bg-color">Background color of output</label>
+                    <input id="output-bg-color" value="#ffffff" type="color">
+                </div>
+                <div class="control-group">
+                    <label for="output-fg-color">Foreground color of output</label>
+                    <input id="output-fg-color" value="#000000" type="color">
+                </div>
+                <div class="control-group">
+                    <label for="output-font">Output font</label>
+                    <input id="output-font" type="text">
+                </div>
+                <div class="control-group">
+                    <label for="download-btn">Download as image</label>
+                    <button id="download-btn" type="button">...</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
