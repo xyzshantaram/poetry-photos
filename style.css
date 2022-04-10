@@ -47,7 +47,6 @@ html {
 #output {
     height: 35vw;
     width: 35vw;
-    border: 2px solid gray;
     cursor: pointer;
     user-select: none;
     display: flex;
