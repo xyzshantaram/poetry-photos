@@ -79,6 +79,10 @@ input[type=text]#output-filename {
     width: 14ch;
 }
 
+#output-controls {
+    margin-top: 1rem;
+}
+
 @media screen and (max-aspect-ratio: 1/1) {
     #body-wrapper {
         flex-direction: column;
