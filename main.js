@@ -29,9 +29,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const dl = document.querySelector('#download-btn');
 
     const opFile = document.querySelector('#output-filename');
-    const fileCountSpan = document.querySelector('#file-count');
-    let fileCount = 0;
-    let lastDownloadedFile = '';
 
     textarea.oninput = () => render(textarea.value, output);
     fgColor.oninput = () => outputContainer.style.color = fgColor.value;
@@ -39,10 +36,6 @@ window.addEventListener('DOMContentLoaded', () => {
     opFont.oninput = () => outputContainer.style.fontFamily = opFont.value;
     dl.onclick = () => domtoimage.toBlob(outputContainer).then((data) => {
         let filename = opFile.value.trim() || 'poem';
-        if (lastDownloadedFile !== filename) fileCount = 0;
-        else fileCount += 1;
-        lastDownloadedFile = filename;
-        fileCountSpan.textContent = fileCount;
-        download(data, `${filename}-${fileCount}.png`);
+        download(data, `${filename}.png`);
     })
 })
