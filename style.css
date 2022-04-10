@@ -66,6 +66,19 @@ html {
     line-height: 1.6;
 }
 
+input[type=text] {
+    width: 20ch;
+    font-family: inherit;
+    font-size: inherit;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+input[type=text]#output-filename {
+    width: 14ch;
+}
+
 @media screen and (max-aspect-ratio: 1/1) {
     #body-wrapper {
         flex-direction: column;

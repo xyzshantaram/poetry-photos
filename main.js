@@ -28,11 +28,21 @@ window.addEventListener('DOMContentLoaded', () => {
     const opFont = document.querySelector('#output-font');
     const dl = document.querySelector('#download-btn');
 
+    const opFile = document.querySelector('#output-filename');
+    const fileCountSpan = document.querySelector('#file-count');
+    let fileCount = 0;
+    let lastDownloadedFile = '';
+
     textarea.oninput = () => render(textarea.value, output);
     fgColor.oninput = () => outputContainer.style.color = fgColor.value;
     bgColor.oninput = () => outputContainer.style.backgroundColor = bgColor.value;
     opFont.oninput = () => outputContainer.style.fontFamily = opFont.value;
     dl.onclick = () => domtoimage.toBlob(outputContainer).then((data) => {
-        download(data, 'poem.png');
+        let filename = opFile.value.trim() || 'poem';
+        if (lastDownloadedFile !== filename) fileCount = 0;
+        else fileCount += 1;
+        lastDownloadedFile = filename;
+        fileCountSpan.textContent = fileCount;
+        download(data, `${filename}-${fileCount}.png`);
     })
 })
