@@ -27,6 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const bgColor = document.querySelector('#output-bg-color');
     const opFont = document.querySelector('#output-font');
     const dl = document.querySelector('#download-btn');
+    const opSize = document.querySelector('#output-font-size');
 
     const opFile = document.querySelector('#output-filename');
 
@@ -38,4 +39,9 @@ window.addEventListener('DOMContentLoaded', () => {
         let filename = opFile.value.trim() || 'poem';
         download(data, `${filename}.png`);
     })
+
+    opSize.oninput = () => {
+        const outputSize = parseFloat(getComputedStyle(document.body).getPropertyValue('--output-font-size').replace(/[^0-9.]/g, ''));
+        outputContainer.style.fontSize = (outputSize * (opSize.value / 100)) + 'vw';
+    }
 })
