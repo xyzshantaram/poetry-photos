@@ -31,6 +31,10 @@ html {
     min-height: 60ch;
 }
 
+#output-lines>span {
+    min-height: var(--output-font-size);
+}
+
 #output-container {
     width: 60%;
     padding: 1rem;
