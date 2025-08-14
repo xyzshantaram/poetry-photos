@@ -57,7 +57,7 @@
 }
 
 #output blockquote {
-    border-left: 0.2em solid var(--border-color, #aaaaaa);
+    border-left: 0.2em solid var(--accent-color, #aaaaaa);
     padding: 0.4em;
     padding-top: 0;
     padding-bottom: 0;

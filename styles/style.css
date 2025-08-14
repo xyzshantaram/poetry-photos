@@ -56,6 +56,7 @@ html {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin: 0.4rem;
 }
 
 font-picker {
@@ -98,6 +99,17 @@ input[type=text]#output-filename {
     width: 16ch;
 }
 
+input[type=text]#output-font-size-text {
+    width: 5ch;
+    margin-left: 0.5rem;
+    margin-right: 0.25rem;
+}
+
+.slider-with-text {
+    display: flex;
+    align-items: center;
+}
+
 .color-picker-container {
     width: 2rem;
     height: 2rem;
@@ -123,6 +135,11 @@ input[type=text]#output-filename {
     justify-content: center;
 }
 
+.control-group.submit-group {
+    margin-top: 1rem;
+    align-items: flex-end;
+}
+
 @media screen and (max-aspect-ratio: 1/1) {
     #body-wrapper {
         flex-direction: column;
@@ -131,6 +148,11 @@ input[type=text]#output-filename {
 
     .control-group {
         width: 100%;
+        margin: 0.2rem;
+    }
+
+    .control-group.submit-group {
+        margin-top: 2rem;
     }
 
     #input-container,
@@ -144,5 +166,10 @@ input[type=text]#output-filename {
 
     #output-controls {
         width: 80%;
+    }
+
+    .control-group:not(.color-group) {
+        flex-direction: column;
+        gap: 0.4rem;
     }
 }

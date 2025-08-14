@@ -33,7 +33,7 @@
                 </div>
 
                 <div id="output-controls">
-                    <div class="control-group">
+                    <div class="control-group color-group">
                         <label for="output-bg-color"
                         >Background color of output</label>
                         <div
@@ -42,7 +42,7 @@
                         >
                         </div>
                     </div>
-                    <div class="control-group">
+                    <div class="control-group color-group">
                         <label for="output-fg-color"
                         >Foreground color of output</label>
                         <div
@@ -51,18 +51,34 @@
                         >
                         </div>
                     </div>
+                    <div class="control-group color-group">
+                        <label for="accent-color">Accent color</label>
+                        <div
+                            id="accent-color"
+                            class="color-picker-container"
+                        >
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label for="output-font-size">Output font size</label>
-                        <input
-                            id="output-font-size"
-                            type="range"
-                            min="0"
-                            max="200"
-                            value="100"
-                            autocomplete="off"
-                        >
+                        <div class="slider-with-text">
+                            <input
+                                id="output-font-size"
+                                type="range"
+                                min="0"
+                                max="200"
+                                value="100"
+                                autocomplete="off"
+                            >
+                            <input
+                                id="output-font-size-text"
+                                type="text"
+                                value="100"
+                                autocomplete="off"
+                            >
+                            <span>%</span>
+                        </div>
                     </div>
-                    <!-- TODO: add text value for font-size -->
                     <div class="control-group">
                         <label for="output-filename">Filename to save as</label>
                         <div>
@@ -73,9 +89,10 @@
                             >.png
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label for="download-btn">Download as png</label>
-                        <button id="download-btn" type="button">...</button>
+                    <div class="control-group submit-group">
+                        <button id="download-btn" type="button">
+                            Download
+                        </button>
                     </div>
                     <div class="control-group">
                         <font-picker

@@ -41,6 +41,7 @@ self.addEventListener('DOMContentLoaded', () => {
     const output = document.querySelector("#output-lines");
     const dl = document.querySelector('#download-btn');
     const opSize = document.querySelector('#output-font-size');
+    const opSizeText = document.querySelector('#output-font-size-text');
     const opFile = document.querySelector('#output-filename');
 
     // Initialize Pickr for background color
@@ -53,6 +54,12 @@ self.addEventListener('DOMContentLoaded', () => {
     const fgColorPicker = Pickr.create({
         default: '#000000ff',
         el: '#output-fg-color',
+        ...PICKR_CFG
+    });
+
+    const accentColorPicker = Pickr.create({
+        default: '#aaaaaaff',
+        el: '#accent-color',
         ...PICKR_CFG
     });
 
@@ -71,6 +78,12 @@ self.addEventListener('DOMContentLoaded', () => {
         fgColorPicker.applyColor();
         const hexColor = color.toHEXA().toString();
         outputContainer.style.color = hexColor;
+    });
+
+    accentColorPicker.on('change', (color) => {
+        accentColorPicker.applyColor();
+        const hexColor = color.toHEXA().toString();
+        outputContainer.style.setProperty('--accent-color', hexColor);
     });
 
     textarea.oninput = () => render(textarea.value, output);
@@ -97,8 +110,17 @@ self.addEventListener('DOMContentLoaded', () => {
 
     opSize.oninput = () => {
         const outputSize = parseFloat(getComputedStyle(document.body).getPropertyValue('--output-font-size').replace(/[^0-9.]/g, ''));
-        console.log(outputSize)
+        opSizeText.value = opSize.value;
         outputContainer.style.fontSize = (outputSize * (opSize.value / 100)) + 'vw';
+    }
+
+    opSizeText.oninput = () => {
+        let value = parseInt(opSizeText.value) || 0;
+        value = Math.max(0, Math.min(200, value));
+        opSizeText.value = value;
+        opSize.value = value;
+        const outputSize = parseFloat(getComputedStyle(document.body).getPropertyValue('--output-font-size').replace(/[^0-9.]/g, ''));
+        outputContainer.style.fontSize = (outputSize * (value / 100)) + 'vw';
     }
 
     render(textarea.value, output);
