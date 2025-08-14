@@ -7,6 +7,10 @@
         <title>Poetry Photos</title>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="preview.css">
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/@simonwep/pickr/dist/themes/monolith.min.css"
+        >
     </head>
 
     <body>
@@ -26,29 +30,25 @@
                 <div id="input">
                     <textarea></textarea>
                 </div>
-            </div>
-            <div id="output-container">
-                <div id="output">
-                    <div id="output-lines"></div>
-                </div>
+
                 <div id="output-controls">
                     <div class="control-group">
                         <label for="output-bg-color"
                         >Background color of output</label>
-                        <input
+                        <div
                             id="output-bg-color"
-                            value="#ffffff"
-                            type="color"
+                            class="color-picker-container"
                         >
+                        </div>
                     </div>
                     <div class="control-group">
                         <label for="output-fg-color"
                         >Foreground color of output</label>
-                        <input
+                        <div
                             id="output-fg-color"
-                            value="#000000"
-                            type="color"
+                            class="color-picker-container"
                         >
+                        </div>
                     </div>
                     <div class="control-group">
                         <label for="output-font">Output font</label>
@@ -78,6 +78,11 @@
                         <label for="download-btn">Download as png</label>
                         <button id="download-btn" type="button">...</button>
                     </div>
+                </div>
+            </div>
+            <div id="output-container">
+                <div id="output">
+                    <div id="output-lines"></div>
                 </div>
             </div>
         </div>
