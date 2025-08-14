@@ -35,6 +35,15 @@
 
 #output blockquote p {
     margin: 0.2rem;
+    margin-left: 0;
+}
+
+#output blockquote p:first-child {
+    margin-top: 0rem;
+}
+
+#output blockquote p:last-child {
+    margin-bottom: 0rem;
 }
 
 #output hr {
