@@ -1,5 +1,5 @@
 #output {
-    width: calc(100% - 1rem);
+    width: calc(100% - 1em);
     border: 2px solid blueviolet;
 }
 
@@ -10,32 +10,32 @@
 .heading-5,
 .heading-6 {
     font-weight: bold;
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
 }
 
 .heading-1 {
-    font-size: 1.6rem;
+    font-size: 1.6em;
 }
 
 .heading-2 {
-    font-size: 1.4rem;
+    font-size: 1.4em;
 }
 
 .heading-3 {
-    font-size: 1.2rem;
+    font-size: 1.2em;
 }
 
 .heading-4 {
-    font-size: 1.1rem;
+    font-size: 1.1em;
 }
 
 .heading-5 {
-    font-size: 1rem;
+    font-size: 1em;
 }
 
 .heading-6 {
-    font-size: 0.9rem;
+    font-size: 0.9em;
 }
 
 #output.noborder {
@@ -52,34 +52,34 @@
 }
 
 #output p {
-    margin-top: 0.6rem;
-    margin-bottom: 0.6rem;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
 }
 
 #output blockquote {
-    border-left: 3px solid var(--border-color, #aaaaaa);
-    padding: 0.4rem;
+    border-left: 0.2em solid var(--border-color, #aaaaaa);
+    padding: 0.4em;
     padding-top: 0;
     padding-bottom: 0;
-    margin: 0.2rem;
+    margin: 0.2em;
 }
 
 #output blockquote p {
-    margin: 0.2rem;
+    margin: 0.2em;
     margin-left: 0;
 }
 
 #output blockquote p:first-child {
-    margin-top: 0rem;
+    margin-top: 0em;
 }
 
 #output blockquote p:last-child {
-    margin-bottom: 0rem;
+    margin-bottom: 0em;
 }
 
 #output hr {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
     width: 50%;
     height: 1.5px;
     background: var(--body-secondary);
