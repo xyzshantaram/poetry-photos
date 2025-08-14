@@ -1,3 +1,19 @@
+const debounce = (fn, interval) => {
+    let lastCall = Date.now();
+    let lastOutput = fn();
+    return () => {
+        const now = Date.now();
+        if ((now - lastCall) > interval) {
+            lastCall = now;
+            lastOutput = fn();
+            return lastOutput;
+        }
+        else {
+            return lastOutput;
+        }
+    }
+}
+
 class FontPicker extends HTMLElement {
     constructor() {
         super();
@@ -7,19 +23,20 @@ class FontPicker extends HTMLElement {
         this.selectedFont = '';
         this.searchTerm = '';
         this.apiKey = this.getAttribute('api-key') || '';
-        this.apiUrl = this.getAttribute('api-url') || `https://www.googleapis.com/webfonts/v1/webfonts`;
+        this.apiUrl = this.getAttribute('api-url');
         this.height = this.getAttribute('height') || '10rem';
+        this.label = this.getAttribute('label') || 'Select font';
         this.loadedFonts = new Set();
 
         this.render();
-        this.loadFonts();
     }
 
     static get observedAttributes() {
-        return ['api-key', 'api-url', 'height'];
+        return ['api-key', 'api-url', 'height', 'label'];
     }
 
     attributeChangedCallback(name, _, updated) {
+        console.log(name, updated);
         if (name === 'api-key') {
             this.apiKey = updated;
             this.loadFonts();
@@ -28,6 +45,15 @@ class FontPicker extends HTMLElement {
             this.apiUrl = updated;
             this.loadFonts();
         }
+        if (name === 'label') {
+            this.setLabel(updated);
+        }
+    }
+
+    setLabel(value) {
+        this.label = value;
+        const label = this.querySelector('label');
+        if (label) label.textContent = value;
     }
 
     render() {
@@ -51,9 +77,10 @@ class FontPicker extends HTMLElement {
           border: 1px solid #ddd;
           border-radius: 0.25rem;
           box-sizing: border-box;
+          margin-top: 0.5rem;
         }
 
-        .selected-font-indicator {
+        #selected-font-indicator {
           font-size: 0.8rem;
           margin: 0.2rem;
           color: #666666;
@@ -123,12 +150,13 @@ class FontPicker extends HTMLElement {
       </style>
 
       <div class="font-picker-container">
+        <label>${this.label}</label>
         <input 
           type="text" 
           placeholder="Search fonts..."
           id="search-input"
         >
-        <div class="selected-font-indicator" id="selectedFontIndicator">
+        <div id="selected-font-indicator">
           Currently selected: <strong>None</strong>
         </div>
         <div id="font-select" class="font-select" tabindex="-1">
@@ -139,7 +167,7 @@ class FontPicker extends HTMLElement {
 
         this.searchInput = this.shadowRoot.getElementById('search-input');
         this.fontSelect = this.shadowRoot.getElementById('font-select');
-        this.selectedFontIndicator = this.shadowRoot.getElementById('selectedFontIndicator');
+        this.selectedFontIndicator = this.shadowRoot.getElementById('selected-font-indicator');
 
         this.searchInput.addEventListener('input', (e) => {
             this.searchTerm = e.target.value.toLowerCase();
@@ -211,10 +239,19 @@ class FontPicker extends HTMLElement {
         });
     }
 
-    async loadFonts() {
+    loadFonts() {
+        if (!this.debouncedLoadFonts) this.debouncedLoadFonts = debounce(() => this.loadFontsInternal(), 250);
+        return this.debouncedLoadFonts();
+    }
+
+    async loadFontsInternal() {
         if (!this.apiKey) {
             this.showError('API key is required. Please provide an API key.');
             return;
+        }
+
+        if (!this.apiUrl) {
+            return setTimeout(() => this.loadFontsInternal(), 1000);
         }
 
         try {
@@ -238,6 +275,7 @@ class FontPicker extends HTMLElement {
     }
 
     filterFonts() {
+        if (!this.fonts.length) this.loadFonts();
         if (!this.searchTerm) {
             this.filteredFonts = [];
         } else {
@@ -279,7 +317,6 @@ class FontPicker extends HTMLElement {
                 html.push(`<div class="font-category">${category}</div>`);
 
                 categoryFonts.forEach(font => {
-                    const isSelected = this.selectedFont === font.family;
                     html.push(`
             <div tabindex='${++i}' class="font-option" data-font="${font.family}">
               <span class="font-name">${font.family}</span>
@@ -351,6 +388,10 @@ class FontPicker extends HTMLElement {
 
         this.selectedFontIndicator.innerHTML =
             `Currently selected: <span class="selected-font-name">${fontFamily}</span>`;
+
+        document.querySelectorAll('.font-picker-apply').forEach(itm => {
+            itm.style.fontFamily = 'var(--font-picker-selected-font)';
+        })
 
         document.documentElement.style.setProperty(
             '--font-picker-selected-font',
