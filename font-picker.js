@@ -1,3 +1,5 @@
+import fuzzysort from 'https://esm.sh/fuzzysort@3.1.0';
+
 const debounce = (fn, interval) => {
     let lastCall = Date.now();
     let lastOutput = fn();
@@ -247,7 +249,7 @@ class FontPicker extends HTMLElement {
     async loadFontsInternal() {
         if (!this.apiKey) {
             this.showError('API key is required. Please provide an API key.');
-            return;
+            return setTimeout(() => this.loadFontsInternal(), 1000);
         }
 
         if (!this.apiUrl) {
@@ -279,10 +281,12 @@ class FontPicker extends HTMLElement {
         if (!this.searchTerm) {
             this.filteredFonts = [];
         } else {
-            this.filteredFonts = this.fonts.filter(font =>
-                font.family.toLowerCase().includes(this.searchTerm) ||
-                font.category.toLowerCase().includes(this.searchTerm)
-            );
+            this.filteredFonts = fuzzysort.go(this.searchTerm, this.fonts, {
+                key: 'family',
+                threshold: 0.5
+            })
+                .toSorted((a, b) => b.score - a.score)
+                .map(itm => itm.obj);
         }
         this.renderFontList();
     }
