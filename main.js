@@ -4,7 +4,6 @@ import Pickr from 'https://esm.sh/@simonwep/pickr';
 import { parseMd } from './parse.js';
 
 const render = (text, div) => {
-    const lines = text.split("\n");
     div.innerHTML = parseMd(text);
 }
 
@@ -35,14 +34,12 @@ const PICKR_CFG = {
 }
 
 
-window.addEventListener('DOMContentLoaded', () => {
+self.addEventListener('DOMContentLoaded', () => {
     const textarea = document.querySelector('#input>textarea');
     const outputContainer = document.querySelector('#output');
     const outputImgContainer = document.querySelector('#output-image');
     const output = document.querySelector("#output-lines");
-    const opFont = document.querySelector('#output-font');
     const dl = document.querySelector('#download-btn');
-    const outputWrapper = document.querySelector('#output-container');
     const opSize = document.querySelector('#output-font-size');
     const opFile = document.querySelector('#output-filename');
 
@@ -77,19 +74,18 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     textarea.oninput = () => render(textarea.value, output);
-    opFont.oninput = () => outputContainer.style.fontFamily = opFont.value;
-    dl.onclick = async () => {
-        const border = window.getComputedStyle(outputContainer).border;
+    dl.onclick = () => {
+        const border = globalThis.getComputedStyle(outputContainer).border;
         outputContainer.style.border = 'none';
         const svg = elementToSVG(outputContainer);
         const img = document.createElement('img');
-        img.src = `data:image/svg+xml;base64,${window.btoa((new XMLSerializer().serializeToString(svg)))}`;
+        img.src = `data:image/svg+xml;base64,${globalThis.btoa((new XMLSerializer().serializeToString(svg)))}`;
         img.width = 3000;
         img.height = 3000;
         img.onload = () => {
             domtoimage.toBlob(img)
                 .then((data) => {
-                    let filename = opFile.value.trim() || 'poem';
+                    const filename = opFile.value.trim() || 'poem';
                     download(data, `${filename}.png`);
                     outputContainer.style.border = border;
                 })
