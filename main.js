@@ -1,14 +1,10 @@
 import domtoimage from 'https://esm.sh/dom-to-image';
 import { elementToSVG } from 'https://esm.sh/dom-to-svg';
+import { parseMd } from './parse.js';
 
 const render = (text, div) => {
     const lines = text.split("\n");
-    div.innerHTML = '';
-    for (const line of lines) {
-        const node = document.createElement('span');
-        node.textContent = line;
-        div.appendChild(node);
-    }
+    div.innerHTML = parseMd(text);
 }
 
 const download = (blob, filename) => {

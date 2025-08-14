@@ -31,14 +31,15 @@ html {
     min-height: 60ch;
 }
 
-#output-lines>span {
-    min-height: var(--output-font-size);
+#output-lines {
+    width: 80%;
 }
 
-#output-container {
+#output {
     width: 60%;
     padding: 1rem;
     overflow: auto;
+    border: 2px solid blueviolet;
 }
 
 .control-group {

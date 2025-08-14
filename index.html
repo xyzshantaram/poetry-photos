@@ -1,64 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Poetry Photos</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="preview.css">
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poetry Photos</title>
-    <link rel='stylesheet' href='style.css'>
-</head>
+    <body>
+        <script type="module" defer src="main.js"></script>
 
-<body>
-    <script type="module" defer src='main.js'></script>
-
-    <div id="body-wrapper">
-        <div id="input-container">
-            <h1>Poetry Photos</h1>
-            <p>Take pretty pictures of your poetry by pasting it in the box below and adjusting the settings, then
-                clicking the download button.</p>
-            <p>A project by <a href='https://shantaram.xyz'>shantaram</a>.</p>
-            <div id="input">
-                <textarea></textarea>
+        <div id="body-wrapper">
+            <div id="input-container">
+                <h1>Poetry Photos</h1>
+                <p>
+                    Take pretty pictures of your poetry by pasting it in the box
+                    below and adjusting the settings, then clicking the download
+                    button.
+                </p>
+                <p>
+                    A project by <a href="https://shantaram.xyz">shantaram</a>.
+                </p>
+                <div id="input">
+                    <textarea></textarea>
+                </div>
             </div>
-        </div>
-        <div id="output-container">
-            <div id="output">
-                <div id="output-lines"></div>
-            </div>
-            <div id="output-controls">
-                <div class="control-group">
-                    <label for="output-bg-color">Background color of output</label>
-                    <input id="output-bg-color" value="#ffffff" type="color">
+            <div id="output-container">
+                <div id="output">
+                    <div id="output-lines"></div>
                 </div>
-                <div class="control-group">
-                    <label for="output-fg-color">Foreground color of output</label>
-                    <input id="output-fg-color" value="#000000" type="color">
-                </div>
-                <div class="control-group">
-                    <label for="output-font">Output font</label>
-                    <input id="output-font" type="text">
-                </div>
-                <div class="control-group">
-                    <label for="output-font-size">Output font size</label>
-                    <input id="output-font-size" type="range" min="0" max="200" value="100">
-                </div>
-                <div class="control-group">
-                    <label for="output-filename">Filename to save as</label>
-                    <div>
-                        <input id="output-filename" type="text" value="poem">.png
+                <div id="output-controls">
+                    <div class="control-group">
+                        <label for="output-bg-color"
+                        >Background color of output</label>
+                        <input
+                            id="output-bg-color"
+                            value="#ffffff"
+                            type="color"
+                        >
+                    </div>
+                    <div class="control-group">
+                        <label for="output-fg-color"
+                        >Foreground color of output</label>
+                        <input
+                            id="output-fg-color"
+                            value="#000000"
+                            type="color"
+                        >
+                    </div>
+                    <div class="control-group">
+                        <label for="output-font">Output font</label>
+                        <input id="output-font" type="text">
+                    </div>
+                    <div class="control-group">
+                        <label for="output-font-size">Output font size</label>
+                        <input
+                            id="output-font-size"
+                            type="range"
+                            min="0"
+                            max="200"
+                            value="100"
+                        >
+                    </div>
+                    <div class="control-group">
+                        <label for="output-filename">Filename to save as</label>
+                        <div>
+                            <input
+                                id="output-filename"
+                                type="text"
+                                value="poem"
+                            >.png
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="download-btn">Download as png</label>
+                        <button id="download-btn" type="button">...</button>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label for="download-btn">Download as png</label>
-                    <button id="download-btn" type="button">...</button>
-                </div>
             </div>
         </div>
-    </div>
 
-    <div id="output-image">
-    </div>
-</body>
-
+        <div id="output-image"></div>
+    </body>
 </html>
