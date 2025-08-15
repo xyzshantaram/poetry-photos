@@ -88,7 +88,9 @@ self.addEventListener('DOMContentLoaded', () => {
     dl.onclick = () => {
         const border = globalThis.getComputedStyle(outputContainer).border;
         outputContainer.style.border = 'none';
-        domtoimage.toBlob(outputContainer)
+        domtoimage.toBlob(outputContainer, {
+            width: 3000, height: 3000, scale: 6
+        })
             .then((data) => {
                 const filename = opFile.value.trim() || 'poem';
                 download(data, `${filename}.png`);
