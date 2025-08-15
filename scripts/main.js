@@ -1,5 +1,4 @@
-import domtoimage from 'https://esm.sh/dom-to-image-cross-origin@2.6.7';
-import { elementToSVG } from 'https://esm.sh/dom-to-svg';
+import domtoimage from 'https://esm.sh/dom-to-image-more@3.6.3';
 import Pickr from 'https://esm.sh/@simonwep/pickr';
 import { parseMd } from './parse.js';
 
@@ -37,7 +36,6 @@ const PICKR_CFG = {
 self.addEventListener('DOMContentLoaded', () => {
     const textarea = document.querySelector('#input>textarea');
     const outputContainer = document.querySelector('#output');
-    const outputImgContainer = document.querySelector('#output-image');
     const output = document.querySelector("#output-lines");
     const dl = document.querySelector('#download-btn');
     const opSize = document.querySelector('#output-font-size');
@@ -90,22 +88,13 @@ self.addEventListener('DOMContentLoaded', () => {
     dl.onclick = () => {
         const border = globalThis.getComputedStyle(outputContainer).border;
         outputContainer.style.border = 'none';
-        const svg = elementToSVG(outputContainer);
-        const img = document.createElement('img');
-        img.src = `data:image/svg+xml;base64,${globalThis.btoa((new XMLSerializer().serializeToString(svg)))}`;
-        img.width = 3000;
-        img.height = 3000;
-        img.onload = () => {
-            domtoimage.toBlob(img)
-                .then((data) => {
-                    const filename = opFile.value.trim() || 'poem';
-                    download(data, `${filename}.png`);
-                    outputContainer.style.border = border;
-                })
-                .then(_ => img.remove())
-                .catch(e => console.error(e));
-        }
-        outputImgContainer.appendChild(img);
+        domtoimage.toBlob(outputContainer)
+            .then((data) => {
+                const filename = opFile.value.trim() || 'poem';
+                download(data, `${filename}.png`);
+                outputContainer.style.border = border;
+            })
+            .catch(e => console.error(e));
     }
 
     opSize.oninput = () => {

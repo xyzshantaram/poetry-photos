@@ -360,6 +360,7 @@ class FontPicker extends HTMLElement {
             const link = document.createElement('link');
             link.href = `https://fonts.googleapis.com/css2?family=${fontFamily.replace(/\s+/g, '+')}&display=swap`;
             link.rel = 'stylesheet';
+            link.setAttribute('crossorigin', 'crossorigin');
 
             // Wait for the font to load
             const loadPromise = new Promise((resolve, reject) => {
