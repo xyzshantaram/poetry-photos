@@ -1,4 +1,4 @@
-import domtoimage from 'https://esm.sh/dom-to-image';
+import domtoimage from 'https://esm.sh/dom-to-image-cross-origin@2.6.7';
 import { elementToSVG } from 'https://esm.sh/dom-to-svg';
 import Pickr from 'https://esm.sh/@simonwep/pickr';
 import { parseMd } from './parse.js';
