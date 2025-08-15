@@ -8,11 +8,14 @@ const render = (text, div) => {
 
 const download = (blob, filename) => {
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    console.log(blob);
+    const href = URL.createObjectURL(blob);
+    a.href = href;
     a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    URL.revokeObjectURL(href);
 };
 
 const PICKR_CFG = {
