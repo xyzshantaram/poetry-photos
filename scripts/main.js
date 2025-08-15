@@ -1,4 +1,4 @@
-import domtoimage from 'https://esm.sh/dom-to-image-more@3.6.3';
+import * as domtoimage from 'https://esm.sh/html-to-image@1.11.11';
 import Pickr from 'https://esm.sh/@simonwep/pickr';
 import { parseMd } from './parse.js';
 
@@ -92,8 +92,11 @@ self.addEventListener('DOMContentLoaded', () => {
         const border = globalThis.getComputedStyle(outputContainer).border;
         outputContainer.style.border = 'none';
         console.log(outputContainer);
-        const blob = await domtoimage.toBlob(outputContainer, { scale: 6 });
-        const filename = opFile.value.trim() || 'poem';
+        const blob = await domtoimage.toBlob(outputContainer, {
+            canvasHeight: 1500,
+            canvasWidth: 1500
+        });
+        const filename = opFile?.value?.trim() || 'poem';
         download(blob, `${filename}.png`);
         outputContainer.style.border = border;
     }
