@@ -88,18 +88,15 @@ self.addEventListener('DOMContentLoaded', () => {
     });
 
     textarea.oninput = () => render(textarea.value, output);
-    dl.onclick = () => {
+    dl.onclick = async () => {
         const border = globalThis.getComputedStyle(outputContainer).border;
         outputContainer.style.border = 'none';
-        domtoimage.toBlob(outputContainer, {
+        const blob = await domtoimage.toBlob(outputContainer, {
             width: 3000, height: 3000, scale: 6
-        })
-            .then((data) => {
-                const filename = opFile.value.trim() || 'poem';
-                download(data, `${filename}.png`);
-                outputContainer.style.border = border;
-            })
-            .catch(e => console.error(e));
+        });
+        const filename = opFile.value.trim() || 'poem';
+        download(blob, `${filename}.png`);
+        outputContainer.style.border = border;
     }
 
     opSize.oninput = () => {
